@@ -27,14 +27,29 @@ function draw() {
     (keyIsDown(DOWN_ARROW) || keyIsDown(83)) -
     (keyIsDown(UP_ARROW) || keyIsDown(87));
 
+  // --- Meditative motion tuning ---
+  const ACCEL = 0.35; // how quickly velocity changes
+  const FRICTION = 0.9; // closer to 1 = floatier, slower to stop
+  const MAX_SPEED = 4.2;
+
+  // Apply acceleration
+  player.vx += ax;
+  player.vy += ay;
+
+  // Apply friction
+  player.vx *= FRICTION;
+  player.vy *= FRICTION;
+
+  // Cap speed
+  player.vx = constrain(player.vx, -MAX_SPEED, MAX_SPEED);
+  player.vy = constrain(player.vy, -MAX_SPEED, MAX_SPEED);
+
+  // Move
+  player.x += player.vx;
+  player.y += player.vy;
+
   // Cheap diagonal normalization so diagonals aren’t faster
   const len = max(1, abs(dx) + abs(dy));
-
-  // Move player in WORLD space (no bounds in Example 1)
-  player.x += (dx / len) * player.s;
-  player.y += (dy / len) * player.s;
-  player.vx = 0;
-  player.vy = 0;
 
   // ---------- 2) UPDATE VIEW STATE (CAMERA) ----------
   // Center camera on player (NO constrain / bounds here)
