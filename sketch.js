@@ -1,4 +1,4 @@
-let player = { x: 300, y: 300, s: 3 }; // player in WORLD coords
+let player = { x: 300, y: 300, w: 40, h: 40, vx: 0, vy: 0 }; // player in WORLD coords
 let cam = { x: 0, y: 0 }; // camera top-left in WORLD coords
 
 // World size (we draw a world rectangle + features, but we do NOT clamp camera)
@@ -33,6 +33,8 @@ function draw() {
   // Move player in WORLD space (no bounds in Example 1)
   player.x += (dx / len) * player.s;
   player.y += (dy / len) * player.s;
+  player.vx = 0;
+  player.vy = 0;
 
   // ---------- 2) UPDATE VIEW STATE (CAMERA) ----------
   // Center camera on player (NO constrain / bounds here)
