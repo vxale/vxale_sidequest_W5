@@ -32,6 +32,13 @@ function draw() {
   const FRICTION = 0.9; // closer to 1 = floatier, slower to stop
   const MAX_SPEED = 4.2;
 
+  // Cheap diagonal normalization so diagonals aren’t faster
+  const len = max(1, abs(dx) + abs(dy));
+
+  // Acceleration in direction of input
+  const ax = (dx / len) * ACCEL;
+  const ay = (dy / len) * ACCEL;
+
   // Apply acceleration
   player.vx += ax;
   player.vy += ay;
@@ -48,8 +55,9 @@ function draw() {
   player.x += player.vx;
   player.y += player.vy;
 
-  // Cheap diagonal normalization so diagonals aren’t faster
-  const len = max(1, abs(dx) + abs(dy));
+  // Keep player inside the world
+  player.x = constrain(player.x, 0, WORLD_W);
+  player.y = constrain(player.y, 0, WORLD_H);
 
   // ---------- 2) UPDATE VIEW STATE (CAMERA) ----------
   // Center camera on player (NO constrain / bounds here)
