@@ -1,24 +1,9 @@
-/*
-Week 5 — Example 1: Top-Down Camera Follow (Centered, No Bounds)
-
-Course: GBDA302 | Instructors: Dr. Karen Cochrane & David Han
-Date: Feb. 12, 2026
-
-Move: WASD/Arrows
-
-Goal:
-- Keep player position in world space
-- Compute a camera offset from the player (view state)
-- Draw world using translate(-cam.x, -cam.y)
-- Draw HUD in screen space (no translate)
-*/
-
 let player = { x: 300, y: 300, s: 3 }; // player in WORLD coords
 let cam = { x: 0, y: 0 }; // camera top-left in WORLD coords
 
 // World size (we draw a world rectangle + features, but we do NOT clamp camera)
-const WORLD_W = 2400;
-const WORLD_H = 1600;
+const WORLD_W = 5200;
+const WORLD_H = 3400;
 
 // Canvas / viewport size (SCREEN coords)
 const VIEW_W = 800;
