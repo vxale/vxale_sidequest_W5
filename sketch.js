@@ -5,12 +5,8 @@ let cam = { x: 0, y: 0 }; // camera top-left in WORLD coords
 const WORLD_W = 5200;
 const WORLD_H = 3400;
 
-// Canvas / viewport size (SCREEN coords)
-const VIEW_W = 800;
-const VIEW_H = 480;
-
 function setup() {
-  createCanvas(VIEW_W, VIEW_H);
+  createCanvas(windowWidth, windowHeight);
   textFont("sans-serif");
   textSize(14);
   noStroke();
