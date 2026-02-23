@@ -46,15 +46,7 @@ function draw() {
   push();
   translate(-cam.x, -cam.y);
 
-  // World background rectangle (so you can see the “world area”)
-  noStroke();
-  fill(235);
-  rect(0, 0, WORLD_W, WORLD_H);
-
-  // Grid lines make camera motion easy to see
-  stroke(245);
-  for (let x = 0; x <= WORLD_W; x += 160) line(x, 0, x, WORLD_H);
-  for (let y = 0; y <= WORLD_H; y += 160) line(0, y, WORLD_W, y);
+  drawMeditativeBackground();
 
   // Obstacles (static world features)
   noStroke();
@@ -87,4 +79,27 @@ function draw() {
     12,
     40,
   );
+}
+
+function drawMeditativeBackground() {
+  // ground illustration
+  noStroke();
+  for (let y = 0; y < WORLD_H; y += 18) {
+    const n = y / WORLD_H;
+    fill(14 + 18 * (1 - n), 16 + 18 * (1 - n), 22 + 30 * (1 - n));
+    rect(0, y, WORLD_W, 18);
+  }
+
+  // sparse stones to create gentle points of reference
+  for (let i = 0; i < 140; i++) {
+    const x = (i * 137) % WORLD_W; // deterministic placement
+    const y = (i * 251) % WORLD_H;
+    const r = 10 + (i % 7) * 3;
+
+    fill(180, 190, 210, 35);
+    ellipse(x, y, r * 1.8, r);
+
+    fill(220, 230, 255, 16);
+    ellipse(x - r * 0.2, y - r * 0.15, r * 0.6, r * 0.35);
+  }
 }
