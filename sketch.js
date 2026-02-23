@@ -36,8 +36,15 @@ function draw() {
 
   // ---------- 2) UPDATE VIEW STATE (CAMERA) ----------
   // Center camera on player (NO constrain / bounds here)
-  cam.x = player.x - width / 2;
-  cam.y = player.y - height / 2;
+  // Desired camera position
+  const targetCamX = player.x - width / 2;
+  const targetCamY = player.y - height / 2;
+
+  // Ease toward target
+  const CAM_EASE = 0.06;
+
+  cam.x = lerp(cam.x, targetCamX, CAM_EASE);
+  cam.y = lerp(cam.y, targetCamY, CAM_EASE);
 
   // ---------- 3) DRAW ----------
   background(220);
